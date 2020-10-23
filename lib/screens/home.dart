@@ -1,5 +1,6 @@
 import 'package:estudo_loja/mock/gridItems.dart';
 import 'package:estudo_loja/models/models_items.dart';
+import 'package:estudo_loja/screens/add_product.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -33,7 +34,11 @@ class _HomeState extends State<Home> {
           centerTitle: true,
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => AddProduct(),
+                ));
+              },
               icon: Icon(Icons.add),
             )
           ],
@@ -68,7 +73,11 @@ class _HomeState extends State<Home> {
               SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => AddProduct(),
+            ));
+          },
           child: Icon(Icons.add),
         ),
       ),
