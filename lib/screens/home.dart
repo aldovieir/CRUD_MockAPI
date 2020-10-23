@@ -1,4 +1,4 @@
-import 'package:estudo_loja/home/gridItems.dart';
+import 'package:estudo_loja/mock/gridItems.dart';
 import 'package:estudo_loja/models/models_items.dart';
 import 'package:flutter/material.dart';
 

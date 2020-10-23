@@ -1,6 +1,10 @@
-import 'package:estudo_loja/home/home.dart';
 import 'package:flutter/material.dart';
+import 'screens/splash.dart';
 
 void main() {
-  runApp(Home());
+  runApp(
+    MaterialApp(
+      home: Splash(),
+    ),
+  );
 }
