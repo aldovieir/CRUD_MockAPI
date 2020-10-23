@@ -12,7 +12,6 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _getList();
   }
@@ -32,6 +31,12 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
           title: Text('Home'),
           centerTitle: true,
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.add),
+            )
+          ],
         ),
         body: GridView.builder(
           itemCount: list.length,
@@ -61,6 +66,10 @@ class _HomeState extends State<Home> {
           },
           gridDelegate:
               SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(Icons.add),
         ),
       ),
     );
