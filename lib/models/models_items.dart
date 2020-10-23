@@ -4,8 +4,8 @@
 
 import 'dart:convert';
 
-class EventoModelTest {
-  EventoModelTest({
+class ModeloItems {
+  ModeloItems({
     this.id,
     this.nome,
     this.preco,
@@ -17,13 +17,12 @@ class EventoModelTest {
   final String preco;
   final String imagem;
 
-  factory EventoModelTest.fromRawJson(String str) =>
-      EventoModelTest.fromJson(json.decode(str));
+  factory ModeloItems.fromRawJson(String str) =>
+      ModeloItems.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory EventoModelTest.fromJson(Map<String, dynamic> json) =>
-      EventoModelTest(
+  factory ModeloItems.fromJson(Map<String, dynamic> json) => ModeloItems(
         id: json["id"] == null ? null : json["id"],
         nome: json["nome"] == null ? null : json["nome"],
         preco: json["preco"] == null ? null : json["preco"],
@@ -37,10 +36,8 @@ class EventoModelTest {
         "imagem": imagem == null ? null : imagem,
       };
 
-  static List<EventoModelTest> fromJsonList(List list) {
+  static List<ModeloItems> fromJsonList(List list) {
     if (list == null) return null;
-    return list
-        .map<EventoModelTest>((item) => EventoModelTest.fromJson(item))
-        .toList();
+    return list.map<ModeloItems>((item) => ModeloItems.fromJson(item)).toList();
   }
 }
