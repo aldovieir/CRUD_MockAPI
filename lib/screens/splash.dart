@@ -1,6 +1,6 @@
-import 'package:estudo_loja/screens/add_product.dart';
-import 'package:estudo_loja/screens/hometeste.dart';
 import 'package:flutter/material.dart';
+
+import 'home.dart';
 
 class Splash extends StatefulWidget {
   @override

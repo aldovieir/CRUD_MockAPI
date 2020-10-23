@@ -1,4 +1,4 @@
-import 'package:estudo_loja/screens/hometeste.dart';
+import 'package:estudo_loja/screens/home.dart';
 import 'package:flutter/material.dart';
 
 class AddProduct extends StatefulWidget {
