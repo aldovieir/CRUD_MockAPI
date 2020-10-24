@@ -1,4 +1,4 @@
-import 'package:estudo_loja/models/models_items.dart';
+/*import 'package:estudo_loja/models/models_items.dart';
 
 class GridItems {
   List<ModeloItems> getList() {
@@ -34,4 +34,4 @@ class GridItems {
     );
     return [a, b, c, d, f];
   }
-}
+}*/

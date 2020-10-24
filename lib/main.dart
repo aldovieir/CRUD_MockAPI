@@ -1,6 +1,14 @@
-import 'package:estudo_loja/home/home.dart';
 import 'package:flutter/material.dart';
+import 'screens/splash.dart';
+import 'package:oktoast/oktoast.dart';
 
 void main() {
-  runApp(Home());
+  runApp(
+    OKToast(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Splash(),
+      ),
+    ),
+  );
 }
