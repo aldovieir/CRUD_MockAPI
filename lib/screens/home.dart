@@ -1,3 +1,4 @@
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:dio/dio.dart';
 import 'package:estudo_loja/models/models_items.dart';
 import 'package:estudo_loja/screens/add_product.dart';
@@ -62,6 +63,7 @@ class _HomeState extends State<Home> {
             onPressed: () {
               setState(() {
                 futureFunction = getProducts();
+                Future.delayed(Duration(seconds: 3));
                 showToast("Produtos recarregados!",
                     backgroundColor: Colors.green[600]);
               });
@@ -70,86 +72,130 @@ class _HomeState extends State<Home> {
           )
         ],
       ),
-      body: FutureBuilder<List<ModeloItems>>(
-        future: futureFunction,
-        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          if (!snapshot.hasData) {
-            return Center(child: CircularProgressIndicator());
-          }
+      body: Container(
+        color: Colors.grey[300],
+        child: FutureBuilder<List<ModeloItems>>(
+          future: futureFunction,
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            if (!snapshot.hasData) {
+              return Center(child: CircularProgressIndicator());
+            }
 
-          list = snapshot.data;
+            list = snapshot.data;
 
-          if (list.isEmpty) {
-            return Center(child: Text("Sem produtos"));
-          }
+            if (list.isEmpty) {
+              return Center(child: Text("Sem produtos"));
+            }
 
-          return GridView.builder(
-            itemCount: list.length,
-            itemBuilder: (BuildContext context, int index) {
-              return AspectRatio(
-                aspectRatio: 2.5,
-                child: Container(
-                  height: 100,
-                  width: 50,
+            return GridView.builder(
+              itemCount: list.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Card(
-                    child: Column(
-                      children: [
-                        Container(
-                          width: 100,
-                          height: 100,
-                          child: Image.network(list[index].imagem),
-                        ),
-                        Expanded(
-                          child: Text(list[index].nome),
-                        ),
-                        Expanded(
-                          child: Text(list[index].preco.toString()),
-                        ),
-                        Expanded(
-                          child: FlatButton(
-                              onPressed: () {
-                                try {
-                                  dio
-                                      .delete("$token/${list[index].id}")
-                                      .then((_) {
-                                    setState(() {
-                                      futureFunction = getProducts();
-                                      showToast("Produtos deletado!",
-                                          backgroundColor: Colors.green[600]);
+                    shadowColor: Colors.blue,
+                    elevation: 5,
+                    child: Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          AspectRatio(
+                            aspectRatio: 1.5,
+                            child: Container(
+                              //width: 100,
+                              //height: 100,
+                              child: Center(
+                                child: CircularProfileAvatar(
+                                  list[index].imagem,
+                                  radius: 50,
+                                  backgroundColor: Colors.transparent,
+                                  borderWidth: 1,
+                                  borderColor: Colors.blue[300],
+                                  elevation: 5.0,
+                                  //foregroundColor: Colors.blue.withOpacity(0.5),
+                                  cacheImage: true,
+                                  showInitialTextAbovePicture: true,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Center(
+                            child: Text(list[index].nome,
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 18,
+                                )),
+                          ),
+                          Center(
+                            child: Text(list[index].idade.toString(),
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 16,
+                                )),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => EditProduct(
+                                          idED: list[index].id,
+                                          imagemED: list[index].imagem,
+                                          nomeED: list[index].nome,
+                                          idadeED: list[index].idade,
+                                        ),
+                                      ));
+                                },
+                                icon: Icon(
+                                  Icons.edit,
+                                  color: Colors.green,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  try {
+                                    dio
+                                        .delete("$token/${list[index].id}")
+                                        .then((_) {
+                                      setState(() {
+                                        futureFunction = getProducts();
+                                        showToast("Produtos deletado!",
+                                            backgroundColor: Colors.green[600]);
+                                      });
                                     });
-                                  });
-                                } catch (e) {
-                                  showToast("Erro: ${e.toString()}",
-                                      backgroundColor: Colors.red[600]);
-                                }
-                              },
-                              child: Text('Deletar')),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => EditProduct(
-                                    idED: list[index].id,
-                                    imagemED: list[index].imagem,
-                                    nomeED: list[index].nome,
-                                    precoED: list[index].preco,
-                                  ),
-                                ));
-                          },
-                          icon: Icon(Icons.edit),
-                        ),
-                      ],
+                                  } catch (e) {
+                                    showToast("Erro: ${e.toString()}",
+                                        backgroundColor: Colors.red[600]);
+                                  }
+                                },
+                                icon: Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
-            gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-          );
-        },
+                );
+              },
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: (MediaQuery.of(context).size.width >
+                        MediaQuery.of(context).size.height)
+                    ? 5
+                    : 2,
+                mainAxisSpacing: 10,
+                childAspectRatio: .8,
+                //crossAxisSpacing: 5,
+              ),
+            );
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

@@ -9,17 +9,17 @@ class EditProduct extends StatelessWidget {
   EditProduct(
       {this.idED,
       @required this.nomeED,
-      @required this.precoED,
+      @required this.idadeED,
       @required this.imagemED});
 
   final String idED;
   final String nomeED;
   final String imagemED;
-  final String precoED;
+  final int idadeED;
 
   TextEditingController _nameController = TextEditingController();
 
-  TextEditingController _priceController = TextEditingController();
+  TextEditingController _idadeController = TextEditingController();
 
   TextEditingController _linkController = TextEditingController();
 
@@ -27,7 +27,7 @@ class EditProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     var url = "https://5f933a5f8742070016da67ea.mockapi.io/products";
     _nameController.text = nomeED ?? "";
-    _priceController.text = precoED ?? "";
+    _idadeController.text = idadeED ?? "";
     _linkController.text = imagemED ?? "";
     return Scaffold(
       appBar: AppBar(
@@ -47,10 +47,10 @@ class EditProduct extends StatelessWidget {
             icon: Icon(Icons.save),
             onPressed: () {
               ModeloItems modelItems = ModeloItems(
-                imagem: _linkController.text,
-                nome: _nameController.text,
-                preco: _priceController.text,
-              );
+                  imagem: _linkController.text,
+                  nome: _nameController.text,
+                  idade: int.tryParse(_idadeController.text));
+
               try {
                 Dio().put('$url/$idED', data: modelItems).then((_) {
                   Navigator.of(context).pushReplacement(
@@ -79,12 +79,12 @@ class EditProduct extends StatelessWidget {
                 /*  onChanged: (newValue) => nomeS = newValue, */
               ),
               TextFormField(
-                //initialValue: _priceController.text,
+                //initialValue: _idadeController.text,
                 decoration: InputDecoration(labelText: 'Preço'),
                 keyboardType: TextInputType.numberWithOptions(),
                 textInputAction: TextInputAction.next,
-                controller: _priceController,
-                /*   onChanged: (newValue) => precoS = newValue, */
+                controller: _idadeController,
+                /*   onChanged: (newValue) => idadeS = newValue, */
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,

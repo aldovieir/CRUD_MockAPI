@@ -4,13 +4,13 @@ class ModeloItems {
   ModeloItems({
     this.id,
     this.nome,
-    this.preco,
+    this.idade,
     this.imagem,
   });
 
   final String id;
   final String nome;
-  final String preco;
+  final int idade;
   final String imagem;
 
   factory ModeloItems.fromRawJson(String str) =>
@@ -21,14 +21,14 @@ class ModeloItems {
   factory ModeloItems.fromJson(Map<String, dynamic> json) => ModeloItems(
         id: json["id"] == null ? null : json["id"],
         nome: json["nome"] == null ? null : json["nome"],
-        preco: json["preco"] == null ? null : json["preco"],
+        idade: json["idade"] == null ? null : json["idade"],
         imagem: json["imagem"] == null ? null : json["imagem"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id == null ? null : id,
         "nome": nome == null ? null : nome,
-        "preco": preco == null ? null : preco,
+        "idade": idade == null ? null : idade,
         "imagem": imagem == null ? null : imagem,
       };
 

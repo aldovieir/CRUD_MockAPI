@@ -6,7 +6,7 @@ import 'package:oktoast/oktoast.dart';
 
 class AddProduct extends StatelessWidget {
   final _nameController = TextEditingController();
-  final _priceController = TextEditingController();
+  final _idadeController = TextEditingController();
   final _linkController = TextEditingController();
 
   @override
@@ -32,7 +32,8 @@ class AddProduct extends StatelessWidget {
               ModeloItems modelItems = ModeloItems(
                   imagem: _linkController.text,
                   nome: _nameController.text,
-                  preco: _priceController.text);
+                  idade: int.tryParse(_idadeController.text));
+
               try {
                 Dio().post(url, data: modelItems).then((_) {
                   Navigator.of(context).pushReplacement(
@@ -60,10 +61,10 @@ class AddProduct extends StatelessWidget {
 //onChanged: (newValue) => modelItems.nome = newValue,
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Preço'),
+                decoration: InputDecoration(labelText: 'Idade'),
                 keyboardType: TextInputType.numberWithOptions(),
                 textInputAction: TextInputAction.next,
-                controller: _priceController,
+                controller: _idadeController,
 //onChanged: (newValue) => modelItems.preco = newValue,
               ),
               Row(
