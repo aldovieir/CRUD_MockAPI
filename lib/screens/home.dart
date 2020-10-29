@@ -145,7 +145,7 @@ class _HomeState extends State<Home> {
                                           idED: list[index].id,
                                           imagemED: list[index].imagem,
                                           nomeED: list[index].nome,
-                                          idadeED: list[index].idade,
+                                          idadeED: list[index].idade.toString(),
                                         ),
                                       ));
                                 },

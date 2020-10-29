@@ -27,9 +27,11 @@ class _SplashState extends State<Splash> {
       body: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          child: Image.asset(
-            'images/logo.png',
-            fit: BoxFit.cover,
+          child: Center(
+            child: Image.asset(
+              'images/logo.png',
+              fit: BoxFit.cover,
+            ),
           )),
     );
   }

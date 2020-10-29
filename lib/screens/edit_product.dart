@@ -15,7 +15,7 @@ class EditProduct extends StatelessWidget {
   final String idED;
   final String nomeED;
   final String imagemED;
-  final int idadeED;
+  final String idadeED;
 
   TextEditingController _nameController = TextEditingController();
 
@@ -69,62 +69,57 @@ class EditProduct extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.all(5),
         child: Form(
-          child: ListView(
-            children: [
-              TextFormField(
-                //initialValue: _nameController.text,
-                decoration: InputDecoration(labelText: 'Nome'),
-                textInputAction: TextInputAction.next,
-                controller: _nameController,
-                /*  onChanged: (newValue) => nomeS = newValue, */
-              ),
-              TextFormField(
-                //initialValue: _idadeController.text,
-                decoration: InputDecoration(labelText: 'Preço'),
-                keyboardType: TextInputType.numberWithOptions(),
-                textInputAction: TextInputAction.next,
-                controller: _idadeController,
-                /*   onChanged: (newValue) => idadeS = newValue, */
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      //initialValue: _linkController.text,
-                      decoration: InputDecoration(labelText: 'Link da imagem'),
-                      keyboardType: TextInputType.url,
-                      controller: _linkController,
-                      textInputAction: TextInputAction.done,
-                      /*  onChanged: (newValue) => imagemS = newValue, */
-                    ),
-                  ),
-                  Container(
-                    height: 100,
-                    width: 100,
-                    margin: EdgeInsets.only(
-                      top: 8,
-                      left: 10,
-                    ),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.grey,
-                        width: 1,
+          child: AspectRatio(
+            aspectRatio: 1,
+            child: ListView(
+              children: [
+                TextFormField(
+                  //initialValue: _nameController.text,
+                  decoration: InputDecoration(labelText: 'Nome'),
+                  textInputAction: TextInputAction.next,
+                  controller: _nameController,
+                  /*  onChanged: (newValue) => nomeS = newValue, */
+                ),
+                TextFormField(
+                  //initialValue: _idadeController.text,
+                  decoration: InputDecoration(labelText: 'Preço'),
+                  keyboardType: TextInputType.numberWithOptions(),
+                  textInputAction: TextInputAction.next,
+                  controller: _idadeController,
+                  /*   onChanged: (newValue) => idadeS = newValue, */
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Flexible(
+                      flex: 3,
+                      child: TextFormField(
+                        //initialValue: _linkController.text,
+                        decoration:
+                            InputDecoration(labelText: 'Link da imagem'),
+                        keyboardType: TextInputType.url,
+                        controller: _linkController,
+                        textInputAction: TextInputAction.done,
+                        /*  onChanged: (newValue) => imagemS = newValue, */
                       ),
                     ),
-                    alignment: Alignment.center,
-                    child: imagemED.isEmpty
-                        ? Text('Informe a URL')
-                        : FittedBox(
-                            child: Image.network(
-                              imagemED,
-                              fit: BoxFit.cover,
+                    Flexible(
+                      flex: 2,
+                      child: imagemED.isEmpty
+                          ? Text('Informe a URL')
+                          : Center(
+                              child: FittedBox(
+                                child: Image.network(
+                                  imagemED,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                             ),
-                          ),
-                  ),
-                ],
-              ),
-            ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

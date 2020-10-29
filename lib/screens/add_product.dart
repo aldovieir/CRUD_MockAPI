@@ -70,7 +70,8 @@ class AddProduct extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Expanded(
+                  Flexible(
+                    flex: 3,
                     child: TextFormField(
                       decoration: InputDecoration(labelText: 'Link da imagem'),
                       keyboardType: TextInputType.url,
@@ -79,28 +80,32 @@ class AddProduct extends StatelessWidget {
                       //  onChanged: (newValue) => modelItems.imagem = newValue,
                     ),
                   ),
-                  Container(
-                    height: 100,
-                    width: 100,
-                    margin: EdgeInsets.only(
-                      top: 8,
-                      left: 10,
-                    ),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.grey,
-                        width: 1,
+                  Flexible(
+                    flex: 2,
+                    child: AspectRatio(
+                      aspectRatio: 1.3,
+                      child: Container(
+                        margin: EdgeInsets.only(
+                          top: 8,
+                          left: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.grey,
+                            width: 1,
+                          ),
+                        ),
+                        alignment: Alignment.center,
+                        child: _linkController.text.isEmpty
+                            ? Center(child: Text('Informe a URL'))
+                            : FittedBox(
+                                child: Image.network(
+                                  _linkController.text,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                       ),
                     ),
-                    alignment: Alignment.center,
-                    child: _linkController.text.isEmpty
-                        ? Text('Informe a URL')
-                        : FittedBox(
-                            child: Image.network(
-                              _linkController.text,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
                   ),
                 ],
               ),
